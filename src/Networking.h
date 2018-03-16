@@ -51,7 +51,7 @@ inline int setsockopt(SOCKET fd, int level, int optname, const void *optval,
 inline SOCKET dup(SOCKET socket) {
   WSAPROTOCOL_INFOW pi;
   if (WSADuplicateSocketW(socket, GetCurrentProcessId(), &pi) == SOCKET_ERROR) {
-    return INVALID_SOCKET;
+    return UWS_INVALID_SOCKET;
   }
   return WSASocketW(pi.iAddressFamily, pi.iSocketType, pi.iProtocol, &pi, 0,
                     WSA_FLAG_OVERLAPPED);
@@ -102,7 +102,7 @@ struct Context {
 #endif
   }
 
-  // returns INVALID_SOCKET on error
+  // returns UWS_INVALID_SOCKET on error
   uv_os_sock_t acceptSocket(uv_os_sock_t fd) {
     uv_os_sock_t acceptedFd;
 #if defined(SOCK_CLOEXEC) && defined(SOCK_NONBLOCK)
@@ -114,7 +114,7 @@ struct Context {
 #endif
 
 #ifdef __APPLE__
-    if (acceptedFd != INVALID_SOCKET) {
+    if (acceptedFd != UWS_INVALID_SOCKET) {
       int noSigpipe = 1;
       setsockopt(acceptedFd, SOL_SOCKET, SO_NOSIGPIPE, &noSigpipe, sizeof(int));
     }
@@ -132,7 +132,7 @@ struct Context {
     uv_os_sock_t createdFd = socket(domain, type | flags, protocol);
 
 #ifdef __APPLE__
-    if (createdFd != INVALID_SOCKET) {
+    if (createdFd != UWS_INVALID_SOCKET) {
       int noSigpipe = 1;
       setsockopt(createdFd, SOL_SOCKET, SO_NOSIGPIPE, &noSigpipe, sizeof(int));
     }
