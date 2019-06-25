@@ -1,4 +1,4 @@
-#
+
 <div align="center"><img src="misc/images/logo.png"/></div>
 
 µWS ("[micro](https://en.wikipedia.org/wiki/Micro-)WS") is a WebSocket and HTTP implementation for clients and servers. Simple, efficient and lightweight.
@@ -35,4 +35,4 @@ int main() {
 #### Freely available.
 Non-profit open source ([Zlib](LICENSE)) since 2016.
 
-####Updated code
+
